@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 07, 2020 at 04:12 PM
+-- Generation Time: Nov 07, 2020 at 09:40 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -37,6 +37,28 @@ CREATE TABLE `address` (
   `fk_zip_code` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `address`
+--
+
+INSERT INTO `address` (`address_ID`, `address_street_name`, `address_house_number`, `address_country`, `fk_zip_code`) VALUES
+(1001, 'Neustiftgasse', 15, 'Austria', 1070),
+(1002, 'Blindengasse', 8, 'Austria', 1080),
+(1003, 'Huberweg', 44, 'Austria', 4040),
+(1004, 'Horstforstweg', 13, 'Austria', 5020),
+(1005, 'Pfeilgasse', 1, 'Austria', 8010),
+(1006, 'Breiterweg', 115, 'Austria', 6020),
+(2001, 'Neustiftgasse', 90, 'Austria', 1070),
+(2002, 'Gürtelstraße', 33, 'Austria', 1080),
+(2003, 'Wegerstraße', 29, 'Austria', 5020),
+(2004, 'Straßerweg', 111, 'Austria', 6020),
+(2005, 'Holzweg', 815, 'Austria', 8010),
+(3001, 'Stellstraße', 44, 'Austria', 1070),
+(3002, 'Hansweg', 334, 'Austria', 6020),
+(3003, 'Holzgasse', 13, 'Austria', 5020),
+(3004, 'Stellstraße', 14, 'Austria', 1080),
+(3005, 'Schnellstraße', 44, 'Austria', 4040);
+
 -- --------------------------------------------------------
 
 --
@@ -52,6 +74,20 @@ CREATE TABLE `delivery` (
   `fk_package_ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `delivery`
+--
+
+INSERT INTO `delivery` (`delivery_ID`, `delivery_date`, `delivery_time`, `fk_truck_ID`, `fk_employee_ID`, `fk_package_ID`) VALUES
+(1, '1991-06-01', '13:33:00', 1, 10001, 1),
+(2, '2015-12-08', '08:12:00', 3, 10003, 2),
+(3, '2017-05-01', '09:15:00', 4, 10002, 3),
+(4, '2020-12-05', '18:13:00', 1, 10004, 4),
+(5, '2019-01-23', '07:05:00', 2, 10005, 5),
+(6, '2015-05-18', '11:55:00', 2, 10006, 6),
+(7, '2001-12-29', '12:41:00', 4, 10005, 7),
+(8, '2009-08-20', '10:23:00', 3, 10003, 8);
+
 -- --------------------------------------------------------
 
 --
@@ -66,6 +102,24 @@ CREATE TABLE `employee` (
   `fk_office_ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `employee`
+--
+
+INSERT INTO `employee` (`employee_ID`, `employee_first_name`, `employee_last_name`, `employee_department`, `fk_office_ID`) VALUES
+(10001, 'Hermann', 'Maier', 'Delivery', 1),
+(10002, 'Fritz', 'Ehrenmann', 'Delivery', 2),
+(10003, 'Gudrun', 'Mayr', 'Delivery', 3),
+(10004, 'Alexander', 'Möller', 'Delivery', 4),
+(10005, 'Thomas', 'Winkler', 'Delivery', 5),
+(10006, 'Gabriel', 'Schütz', 'Delivery', 6),
+(10008, 'Sebastian', 'Fellner', 'Office', 1),
+(10009, 'Rene', 'Möller', 'Office', 2),
+(10010, 'Roland', 'Oberwinkler', 'Office', 3),
+(10011, 'Verena', 'Hochberger', 'Office', 4),
+(10012, 'Helene', 'Hintervorderberger', 'Office', 5),
+(10013, 'Miriam', 'Stadlbauer', 'Office', 6);
+
 -- --------------------------------------------------------
 
 --
@@ -77,6 +131,18 @@ CREATE TABLE `office` (
   `office_name` varchar(55) DEFAULT NULL,
   `fk_address_ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `office`
+--
+
+INSERT INTO `office` (`office_ID`, `office_name`, `fk_address_ID`) VALUES
+(1, 'Wien-Neubau', 1001),
+(2, 'Wien-Josefstadt', 1002),
+(3, 'Linz-Urfahr', 1003),
+(4, 'Salzburg', 1004),
+(5, 'Innsbruck', 1006),
+(6, 'Graz', 1005);
 
 -- --------------------------------------------------------
 
@@ -93,6 +159,20 @@ CREATE TABLE `package` (
   `fk_office_ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `package`
+--
+
+INSERT INTO `package` (`package_ID`, `package_date_deposited`, `fk_package_type_ID`, `fk_sender_ID`, `fk_recipient_ID`, `fk_office_ID`) VALUES
+(1, '1991-05-27', 2, 2, 5, 3),
+(2, '2015-12-03', 2, 4, 3, 2),
+(3, '2017-04-17', 2, 3, 2, 5),
+(4, '2020-11-01', 2, 1, 1, 1),
+(5, '2019-01-21', 1, 2, 2, 2),
+(6, '2015-05-15', 2, 3, 3, 3),
+(7, '2001-12-23', 2, 4, 4, 4),
+(8, '2009-08-11', 1, 5, 5, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -103,6 +183,14 @@ CREATE TABLE `package_type` (
   `package_type_ID` int(11) NOT NULL,
   `package_type` varchar(55) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `package_type`
+--
+
+INSERT INTO `package_type` (`package_type_ID`, `package_type`) VALUES
+(1, 'Mail'),
+(2, 'Package');
 
 -- --------------------------------------------------------
 
@@ -117,6 +205,17 @@ CREATE TABLE `recipient` (
   `fk_address_ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `recipient`
+--
+
+INSERT INTO `recipient` (`recipient_ID`, `recipient_first_name`, `recipient_last_name`, `fk_address_ID`) VALUES
+(1, 'Gertrude', 'Hansson', 3001),
+(2, 'Herboldt', 'Gunslberger', 3002),
+(3, 'Gianno', 'Branelli', 3003),
+(4, 'Gundbrechthild', 'Scorpio', 3004),
+(5, 'Hank', 'Hinterberger', 3005);
+
 -- --------------------------------------------------------
 
 --
@@ -130,6 +229,17 @@ CREATE TABLE `sender` (
   `fk_type_ID` int(11) DEFAULT NULL,
   `fk_address_ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `sender`
+--
+
+INSERT INTO `sender` (`sender_ID`, `sender_first_name`, `sender_last_name`, `fk_type_ID`, `fk_address_ID`) VALUES
+(1, 'Friedrich', 'Schmitt', 1, 2001),
+(2, 'Laura', 'Mayr', 1, 2002),
+(3, 'Herbert', 'Zausser', 2, 2004),
+(4, 'Elisabeth', 'Vogel', 1, 2003),
+(5, 'Friedrich', 'Thaler', 2, 2005);
 
 -- --------------------------------------------------------
 
@@ -152,7 +262,11 @@ INSERT INTO `truck` (`truck_ID`, `truck_licence`, `truck_manufacturer`, `truck_t
 (1, 'W-3432J', 'MAN', 'VAN'),
 (2, 'L-8973F', 'VOLVO', 'Truck'),
 (3, 'S-399H9', 'MAN', 'Truck'),
-(4, 'W-JKS22', 'Scania', 'VAN');
+(4, 'W-JKS22', 'Scania', 'VAN'),
+(5, 'L-3432J', 'MAN', 'VAN'),
+(6, 'I-3212J', 'MAN', 'Truck'),
+(7, 'KL-F2221', 'MAN', 'Truck'),
+(8, 'WL-33233', 'Scania', 'VAN');
 
 -- --------------------------------------------------------
 
@@ -165,6 +279,14 @@ CREATE TABLE `type` (
   `type` varchar(55) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `type`
+--
+
+INSERT INTO `type` (`type_ID`, `type`) VALUES
+(1, 'Private'),
+(2, 'Company');
+
 -- --------------------------------------------------------
 
 --
@@ -175,6 +297,18 @@ CREATE TABLE `zip` (
   `zip_code` int(11) NOT NULL,
   `zip_city` varchar(55) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `zip`
+--
+
+INSERT INTO `zip` (`zip_code`, `zip_city`) VALUES
+(1070, 'Wien-Neubau'),
+(1080, 'Wien-Josefstadt'),
+(4040, 'Linz'),
+(5020, 'Salzburg'),
+(6020, 'Innsbruck'),
+(8010, 'Graz');
 
 --
 -- Indexes for dumped tables
