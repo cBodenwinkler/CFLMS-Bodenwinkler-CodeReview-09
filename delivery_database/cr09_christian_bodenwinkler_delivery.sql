@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 07, 2020 at 09:40 PM
+-- Generation Time: Nov 08, 2020 at 01:32 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.11
 
@@ -189,8 +189,9 @@ CREATE TABLE `package_type` (
 --
 
 INSERT INTO `package_type` (`package_type_ID`, `package_type`) VALUES
-(1, 'Mail'),
-(2, 'Package');
+(1, 'Letter'),
+(2, 'Package'),
+(3, 'Other');
 
 -- --------------------------------------------------------
 
@@ -285,7 +286,8 @@ CREATE TABLE `type` (
 
 INSERT INTO `type` (`type_ID`, `type`) VALUES
 (1, 'Private'),
-(2, 'Company');
+(2, 'Company'),
+(3, 'Other');
 
 -- --------------------------------------------------------
 
